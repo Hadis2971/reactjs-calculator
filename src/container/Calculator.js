@@ -45,7 +45,7 @@ class Calculator extends Component {
         console.log(numbers);
     };
 
-    computeResultHandler = (x) => {
+    computeResultHandler = () => {
         numbers.num2 = parseFloat(this.state.result);
         let result = 0;
         switch(numbers.operator){
@@ -61,14 +61,26 @@ class Calculator extends Component {
         this.setState({result: result});
     };
 
+    eraseOneDigitHandler = () => {
+        let helpResult = this.state.result;
+        helpResult = helpResult.slice(0, helpResult.length-1);
+        this.setState({result: helpResult});
+    };
+
+    cleanResultHandler = () => {
+        let helpResult = this.state.result;
+        helpResult = "";
+        this.setState({result: helpResult});
+    };
+
     render(){
         return(
             <div>
                 <Result result={this.state.result} />
 
-                <Operator operatorClick={this.operatorClickHandler} value="CE"/>
-                <Operator operatorClick={this.operatorClickHandler} value="C"/>
-                <Operator operatorClick={this.operatorClickHandler} value="BK"/>
+                <Operator operatorClick={this.cleanResultHandler} value="CE"/>
+                <Operator operatorClick={this.cleanResultHandler} value="C"/>
+                <Operator operatorClick={this.eraseOneDigitHandler} value="BK"/>
                 <Operator operatorClick={this.operatorClickHandler} value="/"/>
 
                 <Operand  operandClick={this.operandClickHandler}  value="7"/>
