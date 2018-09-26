@@ -2,7 +2,7 @@ import React from "react";
 
 const operator = (props) => {
     return(
-        <button onClick={props.operatorClick}>
+        <button onClick={() => props.operatorClick(props.value)}>
             {props.value}
         </button>
     );
