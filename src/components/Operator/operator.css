@@ -1,0 +1,11 @@
+.operator{
+    width: 23%;
+    margin: 1%;
+    cursor: pointer;
+    background-color: #F5F5F5;
+    height: 2.5em;
+    border: none;
+    outline: none;
+    color: #17a2bc;
+    font-size: 1.5em;
+}

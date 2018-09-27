@@ -4,6 +4,8 @@ import Operand from "../components/Operand/operand";
 import Operator from "../components/Operator/operator";
 import Result from "../components/Result/result";
 
+import "./Calculator.css";
+
 const numbers = {
     num1: undefined,
     num2: undefined,
@@ -110,33 +112,35 @@ class Calculator extends Component {
 
     render(){
         return(
-            <div>
+            <div id="calculator">
                 <Result result={this.state.result} />
+                <div id="calculator-inner">
+                    <Operator operatorClick={this.cleanResultHandler} value="CE"/>
+                    <Operator operatorClick={this.cleanResultHandler} value="C"/>
+                    <Operator operatorClick={this.eraseOneDigitHandler} value="BK"/>
+                    <Operator operatorClick={this.operatorClickHandler} value="/"/>
 
-                <Operator operatorClick={this.cleanResultHandler} value="CE"/>
-                <Operator operatorClick={this.cleanResultHandler} value="C"/>
-                <Operator operatorClick={this.eraseOneDigitHandler} value="BK"/>
-                <Operator operatorClick={this.operatorClickHandler} value="/"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="7"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="8"/>
+                    <Operand  operandClick={this.operandClickHandler} value="9"/>
+                    <Operator operatorClick={this.operatorClickHandler} value="*"/>
 
-                <Operand  operandClick={this.operandClickHandler}  value="7"/>
-                <Operand  operandClick={this.operandClickHandler}  value="8"/>
-                <Operand  operandClick={this.operandClickHandler} value="9"/>
-                <Operator operatorClick={this.operatorClickHandler} value="*"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="4"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="5"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="6"/>
+                    <Operator operatorClick={this.operatorClickHandler} value="-"/>
 
-                <Operand  operandClick={this.operandClickHandler}  value="4"/>
-                <Operand  operandClick={this.operandClickHandler}  value="5"/>
-                <Operand  operandClick={this.operandClickHandler}  value="6"/>
-                <Operator operatorClick={this.operatorClickHandler} value="-"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="1"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="2"/>
+                    <Operand  operandClick={this.operandClickHandler}  value="3"/>
+                    <Operator operatorClick={this.operatorClickHandler} value="+"/>
 
-                <Operand  operandClick={this.operandClickHandler}  value="1"/>
-                <Operand  operandClick={this.operandClickHandler}  value="2"/>
-                <Operand  operandClick={this.operandClickHandler}  value="3"/>
-                <Operator operatorClick={this.operatorClickHandler} value="+"/>
-
-                <Operator operatorClick={this.changeSignHandler} value="+-"/>
-                <Operand  operandClick={this.operandClickHandler}   value="0"/>
-                <Operator operatorClick={this.operatorClickHandler} value="."/>
-                <Operator operatorClick={this.computeResultHandler} value="="/>
+                    <Operator operatorClick={this.changeSignHandler} value="+-"/>
+                    <Operand  operandClick={this.operandClickHandler}   value="0"/>
+                    <Operator operatorClick={this.operatorClickHandler} value="."/>
+                    <Operator operatorClick={this.computeResultHandler} value="="/>
+                </div>
+                
             </div>
         );
     }

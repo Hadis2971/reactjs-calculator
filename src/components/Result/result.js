@@ -1,9 +1,13 @@
 import React from "react";
 
+import "./result.css";
+
 const result = (props) => {
     return(
-        <div>
-            {props.result}
+        <div id="result">
+            <p id="inner-result">
+                {props.result}
+            </p>
         </div>
     );
 };

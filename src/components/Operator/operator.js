@@ -1,8 +1,10 @@
 import React from "react";
 
+import "./operator.css";
+
 const operator = (props) => {
     return(
-        <button onClick={() => props.operatorClick(props.value)}>
+        <button className="operator" onClick={() => props.operatorClick(props.value)}>
             {props.value}
         </button>
     );

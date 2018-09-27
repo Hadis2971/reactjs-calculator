@@ -1,8 +1,10 @@
 import React from "react";
 
+import "./operand.css";
+
 const operand = (props) => {
     return(
-        <button onClick={() => props.operandClick(props.value)}>
+        <button className="operand" onClick={() => props.operandClick(props.value)}>
             {props.value}
         </button>
     );

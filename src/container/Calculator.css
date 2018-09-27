@@ -1,0 +1,13 @@
+#calculator{
+    width: 40%;
+    margin: 3% auto;
+    background-color: #E8E8E8;
+    box-sizing: border-box;
+    padding: 0.5em 0.1em;
+}
+
+#calculator-inner{
+    width: 97%;
+    margin: 3% auto;
+
+}

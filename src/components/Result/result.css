@@ -1,0 +1,18 @@
+#result{
+    position: relative;
+    display: block;
+    width: 97%;
+    height: 5em;
+    margin: 0 auto;
+    background-color: #FFF;
+    color: #2D2D2D;
+    box-sizing: border-box;    
+}
+
+#inner-result{
+   position: absolute;
+   padding: 0em;
+   margin: 0em;
+   bottom: 0em;
+   right: 0em;
+}
