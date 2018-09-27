@@ -7,7 +7,8 @@ import Result from "../components/Result/result";
 const numbers = {
     num1: undefined,
     num2: undefined,
-    operator: ""
+    operator: "",
+    computed: false
 };
 
 class Calculator extends Component {
@@ -18,13 +19,20 @@ class Calculator extends Component {
 
     operandClickHandler = (value) => {
 
+        if(numbers.computed){
+            this.setState({result: ""});
+            numbers.computed = false;
+        }
+
         if(!/\d/g.test(this.state.result)){
             this.setState({result: value});
+            
         }else{
-            this.setState(prevState => ({
-                result: prevState.result + value
-            }));
-        }
+           this.setState(prevState => ({
+               result: prevState.result + value
+           }));
+        }     
+                
     };
 
     operatorClickHandler = (value) => {
@@ -33,20 +41,31 @@ class Calculator extends Component {
             this.setState(prevState => ({
                 result: prevState.result + value
             }));
+        }else if(value === "." && /\./g.test(this.state.result)){
+            return;
         }else{
-            if(value === ".")return
             this.setState({result: value});
         }
         
-        if(!numbers.num1){
+        if(!numbers.num1 && value !== "."){
             numbers.num1 = parseFloat(this.state.result);
             numbers.operator = value;
+        }else if(numbers.num1 && value !== "."){
+            numbers.num2 = parseFloat(this.state.result);
+            numbers.num1 = numbers.num2 + numbers.num1;
+            numbers.num2 = undefined;
         }
-        console.log(numbers);
+          
     };
 
     computeResultHandler = () => {
-        numbers.num2 = parseFloat(this.state.result);
+        
+        if(!numbers.num1 && !numbers.operator)return;
+        
+        if(!numbers.num2){
+            numbers.num2 = parseFloat(this.state.result);
+        } 
+
         let result = 0;
         switch(numbers.operator){
             case("/"): result = numbers.num1 / numbers.num2;break;
@@ -57,19 +76,35 @@ class Calculator extends Component {
         
         numbers.num1 = undefined;
         numbers.num2 = undefined;
-
+        numbers.computed = true;
         this.setState({result: result});
+        
     };
 
     eraseOneDigitHandler = () => {
+        if(!/\d/g.test(this.state.result))return;
         let helpResult = this.state.result;
         helpResult = helpResult.slice(0, helpResult.length-1);
         this.setState({result: helpResult});
     };
 
     cleanResultHandler = () => {
+        if(!/\d/g.test(this.state.result))return;
         let helpResult = this.state.result;
         helpResult = "";
+        this.setState({result: helpResult});
+    };
+
+    changeSignHandler = () => {
+        //if(!this.state.result.length)return;
+        let helpResult = String(this.state.result);
+        if(/\-/.test(helpResult)){
+            helpResult = helpResult.slice(1, helpResult.length);
+        }else{
+            helpResult = "-".concat(helpResult);
+            
+        }
+        
         this.setState({result: helpResult});
     };
 
@@ -98,7 +133,7 @@ class Calculator extends Component {
                 <Operand  operandClick={this.operandClickHandler}  value="3"/>
                 <Operator operatorClick={this.operatorClickHandler} value="+"/>
 
-                <Operator value="+-"/>
+                <Operator operatorClick={this.changeSignHandler} value="+-"/>
                 <Operand  operandClick={this.operandClickHandler}   value="0"/>
                 <Operator operatorClick={this.operatorClickHandler} value="."/>
                 <Operator operatorClick={this.computeResultHandler} value="="/>
